@@ -16,4 +16,4 @@ rl.on('line', (input) => {
 
 rl.on('close', () => {
     console.log('Спасибо за проверку!')
-});02-
+})
