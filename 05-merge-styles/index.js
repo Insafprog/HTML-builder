@@ -20,7 +20,7 @@ const path_to = path.join(__dirname, 'project-dist/bundle.css');
                 readStream.on('readable', () => {
                     const data = readStream.read()
                     if (data != null) {
-                        writeStream.write(data)
+                        writeStream.write('\n' + data)
                     }
                 })
             }
