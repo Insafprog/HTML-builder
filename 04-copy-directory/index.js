@@ -16,8 +16,8 @@ const copyDir = async (from, to) => {
             await fs.copyFile(path.join(from, e.name), path.join(to, e.name));
             
         } else {
-            await fs.mkdir(to, { recursive: true });
-            await copyDir(from, to); 
+            await fs.mkdir(path.join(to, e.name), { recursive: true });
+            await copyDir(path.join(from, e.name), path.join(to, e.name));
         }
     }
 }

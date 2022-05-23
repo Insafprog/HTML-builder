@@ -7,8 +7,8 @@ const dir_to = path.join(__dirname, 'project-dist');
 const dir_from = path.join(__dirname, 'styles');
 const path_to = path.join(dir_to, 'style.css');
 
-const dir_copy_from = path.join(__dirname, 'assets')
-const dir_copy_to = path.join(dir_to, 'assets')
+const dir_copy_from = path.join(__dirname, 'assets');
+const dir_copy_to = path.join(dir_to, 'assets');
 
 (async () => {
 
@@ -63,9 +63,6 @@ const dir_copy_to = path.join(dir_to, 'assets')
             }
         }
     }
-
-    await fs.rm(dir_copy_to, { force: true, recursive: true })
-    await fs.mkdir(dir_copy_to, { recursive: true })
 
     const files_to_copy = await fs.readdir(dir_copy_from, { withFileTypes: true })
 
