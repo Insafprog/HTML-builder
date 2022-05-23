@@ -11,7 +11,7 @@ const writeStream = fs.createWriteStream(filename, {encoding: 'utf-8'})
 rl.write('Введите сообщение:\n')
 rl.on('line', (input) => {
     if(input == 'exit') rl.close()
-    writeStream.write(input + '\n')
+    else writeStream.write(input + '\n')
 })
 
 rl.on('close', () => {
