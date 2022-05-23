@@ -1,14 +1,18 @@
-// const fs = require('fs/promises')
-const fs = require('fs').promises
-const path = require('path')
+const fs = require('fs/promises');
+const path = require('path');
 
-const dirname = path.join(__dirname, '/secret-folder')
+(async () => {
+  const dirname = path.join(__dirname, 'secret-folder')
+  const files = await fs.readdir(dirname, { withFileTypes: true })
+  
+  for (let e of files) {
+      if(e.isFile()) {
+        const name_arr = e.name.split('.')
+        const name = name_arr.slice(0, -1).join('.')
+        const ext = name_arr.pop()
+        const weight = (await fs.stat(path.join(dirname, e.name))).size /  1024
 
-const files = fs.readdir(path.join(__dirname, dirname), { withFileTypes: true })
-
-for (let e of files) {
-    if(e.isFile()) {
-      const name = e.name.split('.').slice(0, -1).join('.')
-      
-    }
-}
+        console.log(`${name} - ${ext} - ${weight}kb`)
+      }
+  }
+})()
