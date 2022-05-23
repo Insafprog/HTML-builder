@@ -57,7 +57,7 @@ const dir_copy_to = path.join(dir_to, 'assets');
                 readStream.on('readable', () => {
                     const data = readStream.read()
                     if (data != null) {
-                        cssWriteStream.write(data)
+                        cssWriteStream.write('\n' + data)
                     }
                 })
             }
