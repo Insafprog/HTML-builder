@@ -64,15 +64,22 @@ const dir_copy_to = path.join(dir_to, 'assets');
         }
     }
 
-    const files_to_copy = await fs.readdir(dir_copy_from, { withFileTypes: true })
+    const copyDir = async (from, to) => {
 
-    for (let e of files_to_copy) {
-        if (e.isFile()) {
-            await fs.copyFile(path.join(dir_copy_from, e.name), path.join(dir_copy_to, e.name));
-            
-        } else {
-            await fs.mkdir(dir_copy_to, { recursive: true });
-            await copyDir(dir_copy_from, dir_copy_to); 
+        await fs.promises.mkdir(to, { recursive: true })
+    
+        const files = await fs.promises.readdir(from, { withFileTypes: true })
+    
+        for (let e of files) {
+            if (e.isFile()) {
+                await fs.promises.copyFile(path.join(from, e.name), path.join(to, e.name));
+                
+            } else {
+                await fs.promises.mkdir(path.join(to, e.name), { recursive: true });
+                await copyDir(path.join(from, e.name), path.join(to, e.name));
+            }
         }
-    }    
+    }
+    
+    copyDir(dir_copy_from, dir_copy_to)
 })()
