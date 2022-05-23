@@ -13,11 +13,11 @@ const copyDir = async (from, to) => {
 
     for (let e of files) {
         if (e.isFile()) {
-            await fs.copyFile(path.join(dir_from, e.name), path.join(dir_to, e.name));
+            await fs.copyFile(path.join(from, e.name), path.join(to, e.name));
             
         } else {
-            await fs.mkdir(dir_to, { recursive: true });
-            await copyDir(dir_from, dir_to); 
+            await fs.mkdir(to, { recursive: true });
+            await copyDir(from, to); 
         }
     }
 }
